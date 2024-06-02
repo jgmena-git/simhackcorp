@@ -35,17 +35,7 @@
     </table>
 
     <script>
-        // Función para leer el archivo CSV
-        function readCSV(file, callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    callback(xhr.responseText);
-                }
-            };
-            xhr.open('GET', file);
-            xhr.send();
-        }
+        const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv;
 
         // Función para procesar los datos del CSV
         function processCSV(data) {
@@ -66,7 +56,10 @@
 
         // Leer y procesar el archivo CSV al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            readCSV('ranking.csv', processCSV);
+            fetch(url)
+                .then(response => response.text())
+                .then(data => processCSV(data))
+                .catch(error => console.error('Error fetching the CSV file:', error));
         });
     </script>
 </body>
