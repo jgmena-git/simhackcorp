@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de Puntuaciones</title>
+    <style>
+        table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Ranking de Puntuaciones</h1>
+    <table id="rankingTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Puntuación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se añadirán aquí mediante JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Función para leer el archivo CSV
+        function readCSV(file, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    callback(xhr.responseText);
+                }
+            };
+            xhr.open('GET', file);
+            xhr.send();
+        }
+
+        // Función para procesar los datos del CSV
+        function processCSV(data) {
+            const rows = data.trim().split('\n').slice(1); // Ignorar la primera fila (encabezados)
+            const table = document.getElementById('rankingTable').getElementsByTagName('tbody')[0];
+
+            rows.forEach(row => {
+                const cols = row.split(',');
+                const newRow = table.insertRow();
+
+                const nameCell = newRow.insertCell(0);
+                const scoreCell = newRow.insertCell(1);
+
+                nameCell.textContent = cols[0];
+                scoreCell.textContent = cols[1];
+            });
+        }
+
+        // Leer y procesar el archivo CSV al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            readCSV('ranking.csv', processCSV);
+        });
+    </script>
+</body>
+</html>
