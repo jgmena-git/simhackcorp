@@ -52,7 +52,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Las filas se añadirán aquí mediante JavaScript -->
+
         </tbody>
     </table>
     <button id="refreshButton">Update ranking</button>
@@ -62,17 +62,16 @@
     <script>
         const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv ';
 
-        // Función para procesar los datos del CSV
         function processCSV(data) {
-            console.log('Datos del CSV:', data);  // Depuración: Verificar los datos obtenidos
+            console.log('Datos del CSV:', data);
 
-            const rows = data.trim().split('\n').slice(1); // Ignorar la primera fila (encabezados)
+            const rows = data.trim().split('\n').slice(1);
             const table = document.getElementById('rankingTable').getElementsByTagName('tbody')[0];
-            table.innerHTML = ''; // Limpiar la tabla antes de actualizarla
+            table.innerHTML = '';
 
             rows.forEach(row => {
                 const cols = row.split(',');
-                console.log('Fila procesada:', cols);  // Depuración: Verificar las filas procesadas
+                console.log('Fila procesada:', cols);
 
                 const newRow = table.insertRow();
 
@@ -84,7 +83,6 @@
             });
         }
 
-        // Función para cargar y procesar el archivo CSV
         function loadCSV() {
             fetch(url)
                 .then(response => {
@@ -94,16 +92,14 @@
                     return response.text();
                 })
                 .then(data => {
-                    console.log('Datos obtenidos del fetch:', data);  // Depuración: Verificar los datos obtenidos del fetch
+                    console.log('Datos obtenidos del fetch:', data);
                     processCSV(data);
                 })
                 .catch(error => console.error('Error fetching the CSV file:', error));
         }
 
-        // Añadir un evento al botón para actualizar el CSV
         document.getElementById('refreshButton').addEventListener('click', loadCSV);
 
-        // Leer y procesar el archivo CSV al cargar la página
         document.addEventListener('DOMContentLoaded', loadCSV);
     </script>
 </body>
