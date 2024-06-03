@@ -18,38 +18,34 @@
         th {
             background-color: #f4f4f4;
         }
-        #refreshButton {
+        .rank-1 {
+            background-color: gold;
+            font-size: 24px;
+        }
+        .rank-2 {
+            background-color: silver;
+            font-size: 20px;
+        }
+        .rank-3 {
+            background-color: #cd7f32;
+            font-size: 18px;
+        }
+        .rank-other {
+            font-size: 16px;
+        }
+        button {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #808080;
             color: white;
             text-align: center;
             border: none;
             cursor: pointer;
             font-size: 16px;
         }
-        #submitFlagButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #008CBA;
-            color: white;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #registerButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #FFA500;
-            color: white;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+        button:hover {
+            background-color: #696969;
         }
     </style>
 </head>
@@ -58,6 +54,7 @@
     <table id="rankingTable">
         <thead>
             <tr>
+                <th>Rank</th>
                 <th>Player Name</th>
                 <th>Score</th>
             </tr>
@@ -67,30 +64,48 @@
         </tbody>
     </table>
     <button id="refreshButton">Update ranking</button>
-    <button id="submitFlagButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/submission.html '">Submit flag</button>
+    <button id="submitFlagButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/submission.html'">Submit flag</button>
     <button id="registerButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/registration.html '">Register</button>
 
     <script>
-        const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv ';
+        const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv';
 
         function processCSV(data) {
-            console.log('Datos del CSV:', data); 
+            console.log('Datos del CSV:', data);
 
             const rows = data.trim().split('\n').slice(1);
             const table = document.getElementById('rankingTable').getElementsByTagName('tbody')[0];
             table.innerHTML = '';
 
-            rows.forEach(row => {
+            const scores = rows.map(row => {
                 const cols = row.split(',');
-                console.log('Fila procesada:', cols);
+                return {
+                    name: cols[0],
+                    score: parseInt(cols[1], 10)
+                };
+            });
 
+            scores.sort((a, b) => b.score - a.score);
+
+            scores.forEach((player, index) => {
                 const newRow = table.insertRow();
+                const rankCell = newRow.insertCell(0);
+                const nameCell = newRow.insertCell(1);
+                const scoreCell = newRow.insertCell(2);
 
-                const nameCell = newRow.insertCell(0);
-                const scoreCell = newRow.insertCell(1);
+                rankCell.textContent = index + 1;
+                nameCell.textContent = player.name;
+                scoreCell.textContent = player.score;
 
-                nameCell.textContent = cols[0];
-                scoreCell.textContent = cols[1];
+                if (index === 0) {
+                    rankCell.classList.add('rank-1');
+                } else if (index === 1) {
+                    rankCell.classList.add('rank-2');
+                } else if (index === 2) {
+                    rankCell.classList.add('rank-3');
+                } else {
+                    rankCell.classList.add('rank-other');
+                }
             });
         }
 
