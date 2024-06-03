@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flag Submission Form</h1>
+    <div class="input-container">
+        <input type="file" id="privateKeyFile" accept=".key">
+    </div>
+    <div class="input-container">
+        <input type="text" id="flagSequence" placeholder="Enter the flag sequence">
+    </div>
+    <button onclick="submitFlag()">Submit</button>
+
+    <script>
+        function submitFlag() {
+            const privateKeyFile = document.getElementById('privateKeyFile').files[0];
+            const flagSequence = document.getElementById('flagSequence').value;
+
+            if (!privateKeyFile || !flagSequence) {
+                alert('Please provide both the private key file and the flag sequence.');
+                return;
+            }
+
+            // Lógica para manejar el archivo de clave privada y la secuencia de la bandera.
+            // Aquí podría ir una llamada a un servidor para validar los datos.
+
+            console.log('Private key file:', privateKeyFile.name);
+            console.log('Flag sequence:', flagSequence);
+
+            alert('Flag submitted for validation.');
+            window.location.href = 'ranking.html'; // Redirigir al ranking después de enviar
+        }
+    </script>
+</body>
+</html>
+

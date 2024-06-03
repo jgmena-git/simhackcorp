@@ -18,25 +18,48 @@
         th {
             background-color: #f4f4f4;
         }
+        #refreshButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #submitFlagButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Ranking de Puntuaciones</h1>
+    <h1 style="text-align: center;">Score Ranking</h1>
     <table id="rankingTable">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Puntuación</th>
+                <th>Player Name</th>
+                <th>Score</th>
             </tr>
         </thead>
         <tbody>
             <!-- Las filas se añadirán aquí mediante JavaScript -->
         </tbody>
     </table>
+    <button id="refreshButton">Update ranking</button>
+    <button id="submitFlagButton" onclick="location.href='submission.html'">Submit flag</button>
 
     <script>
-		
-		const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv ';
+        const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv';
 
         // Función para procesar los datos del CSV
         function processCSV(data) {
@@ -44,6 +67,7 @@
 
             const rows = data.trim().split('\n').slice(1); // Ignorar la primera fila (encabezados)
             const table = document.getElementById('rankingTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = ''; // Limpiar la tabla antes de actualizarla
 
             rows.forEach(row => {
                 const cols = row.split(',');
@@ -59,8 +83,8 @@
             });
         }
 
-        // Leer y procesar el archivo CSV al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
+        // Función para cargar y procesar el archivo CSV
+        function loadCSV() {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -73,7 +97,14 @@
                     processCSV(data);
                 })
                 .catch(error => console.error('Error fetching the CSV file:', error));
-        });
+        }
+
+        // Añadir un evento al botón para actualizar el CSV
+        document.getElementById('refreshButton').addEventListener('click', loadCSV);
+
+        // Leer y procesar el archivo CSV al cargar la página
+        document.addEventListener('DOMContentLoaded', loadCSV);
     </script>
 </body>
 </html>
+
