@@ -33,24 +33,30 @@
         .rank-other {
             font-size: 16px;
         }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #808080;
-            color: white;
+        .button-container {
             text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
             cursor: pointer;
             font-size: 16px;
+            margin: 0 10px;
+            display: inline-block;
         }
         button:hover {
-            background-color: #696969;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Score Ranking</h1>
+    <header>
+        <h1>Cybersecurity Challenge</h1>
+    </header>
+    <h2 style="text-align: center;">Score Ranking</h2>
     <table id="rankingTable">
         <thead>
             <tr>
@@ -63,9 +69,11 @@
 
         </tbody>
     </table>
-    <button id="refreshButton">Update ranking</button>
-    <button id="submitFlagButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/submission.html'">Submit flag</button>
-    <button id="registerButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/registration.html '">Register</button>
+    <div class="button-container">
+        <button id="refreshButton">Update Ranking</button>
+        <button id="submitFlagButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/submission.html'">Submit Flag</button>
+        <button id="registerButton" onclick="location.href='https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/registration.html '">Register</button>
+    </div>
 
     <script>
         const url = 'https://raw.githubusercontent.com/jgmena-git/simhackcorp/main/webRanking/ranking.csv';
