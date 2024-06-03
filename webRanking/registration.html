@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <div class="input-container">
+        <input type="text" id="username" placeholder="Enter your username">
+    </div>
+    <div class="input-container">
+        <input type="file" id="publicKeyFile" accept=".pub">
+    </div>
+    <button onclick="registerUser()">Register</button>
+
+    <script>
+        function registerUser() {
+            const username = document.getElementById('username').value;
+            const publicKeyFile = document.getElementById('publicKeyFile').files[0];
+
+            if (!username || !publicKeyFile) {
+                alert('Please provide both a username and a public key file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const publicKey = event.target.result;
+
+                console.log('Username:', username);
+                console.log('Public key:', publicKey);
+
+                alert('User registered successfully.');
+            window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/ranking.html ';
+            };
+
+            reader.readAsText(publicKeyFile);
+        }
+    </script>
+</body>
+</html>
