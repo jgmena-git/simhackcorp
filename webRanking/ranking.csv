@@ -1,7 +1,7 @@
-nombre;puntuacion
-Alice;1700
-Bob;1600
-Charlie;1400
-Dave;1200
-Eve;1300
-Mallory;1500
+nombre,puntuacion
+Alice,1700
+Bob,1600
+Charlie,1400
+Dave,1200
+Eve,1300
+Mallory,1500
