@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        header {
+            margin-bottom: 30px;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="file"], textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cybersecurity Challenge</h1>
+    </header>
+    <h2>Flag Submission Form</h2>
+    <div class="input-container">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username">
+    </div>
+    <div class="input-container">
+        <label for="signedFlag">Encrypted and signed Flag:</label>
+        <textarea id="signedFlag" placeholder="Enter the encrypted and signed flag"></textarea>
+    </div>
+    <button onclick="submitFlag()">Submit</button>
+
+    <script>
+        function submitFlag() {
+            const username = document.getElementById('username').value;
+            const signedFlag = document.getElementById('signedFlag').value;
+
+            if (!username || !signedFlag) {
+                alert('Please provide both your username and the encrypted and signed flag.');
+                return;
+            }
+
+            console.log('Username:', username);
+            console.log('Encrypted and signed flag:', signedFlag);
+
+            alert("Flag submitted for validation.");
+            window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html';
+        }
+    </script>
+</body>
+</html>
