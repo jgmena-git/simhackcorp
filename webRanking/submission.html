@@ -69,22 +69,10 @@
             console.log('Username:', username);
             console.log('Encrypted and signed flag:', signedFlag);
 
-            fetch("/validate-flag", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, signedFlag })
-            }).then(response => {
-                if (response.ok) {
                     alert("Flag submitted for validation.");
                     window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html ';
-                } else {
-                    alert("Validation failed.");
-                }
-            }).catch(error => {
-                console.error('Error submitting the flag to the server:', error);
-            });
+
+
         }
     </script>
 </body>
