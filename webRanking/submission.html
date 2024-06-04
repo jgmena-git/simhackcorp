@@ -21,7 +21,7 @@
             font-size: 18px;
             margin-bottom: 5px;
         }
-        input[type="text"], input[type="file"] {
+        input[type="text"], input[type="file"], textarea {
             padding: 10px;
             font-size: 16px;
             width: 80%;
@@ -47,30 +47,44 @@
     </header>
     <h2>Flag Submission Form</h2>
     <div class="input-container">
-        <label for="privateKeyFile">Private Key:</label>
-        <input type="file" id="privateKeyFile" accept=".key">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username">
     </div>
     <div class="input-container">
-        <label for="flagSequence">Flag Sequence:</label>
-        <input type="text" id="flagSequence" placeholder="Enter the flag sequence">
+        <label for="signedFlag">Encrypted and signed Flag:</label>
+        <textarea id="signedFlag" placeholder="Enter the encrypted and signed flag"></textarea>
     </div>
     <button onclick="submitFlag()">Submit</button>
 
     <script>
         function submitFlag() {
-            const privateKeyFile = document.getElementById('privateKeyFile').files[0];
-            const flagSequence = document.getElementById('flagSequence').value;
+            const username = document.getElementById('username').value;
+            const signedFlag = document.getElementById('signedFlag').value;
 
-            if (!privateKeyFile || !flagSequence) {
-                alert('Please provide both the private key file and the flag sequence.');
+            if (!username || !signedFlag) {
+                alert('Please provide both your username and the encrypted and signed flag.');
                 return;
             }
 
-            console.log('Private key file:', privateKeyFile.name);
-            console.log('Flag sequence:', flagSequence);
+            console.log('Username:', username);
+            console.log('Encrypted and signed flag:', signedFlag);
 
-            alert('Flag submitted for validation.');
-            window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html ';
+            fetch("/validate-flag", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, signedFlag })
+            }).then(response => {
+                if (response.ok) {
+                    alert("Flag submitted for validation.");
+                    window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html ';
+                } else {
+                    alert("Validation failed.");
+                }
+            }).catch(error => {
+                console.error('Error submitting the flag to the server:', error);
+            });
         }
     </script>
 </body>
