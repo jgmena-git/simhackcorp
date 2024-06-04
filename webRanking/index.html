@@ -86,7 +86,7 @@
             table.innerHTML = '';
 
             const scores = rows.map(row => {
-                const cols = row.split(';');
+                const cols = row.split(',');
                 return {
                     name: cols[0],
                     score: parseInt(cols[1], 10)
