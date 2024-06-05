@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
+    <title>Challenge Web - Flag Submission</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +21,7 @@
             font-size: 18px;
             margin-bottom: 5px;
         }
-        input[type="text"], input[type="file"] {
+        input[type="text"], input[type="file"], textarea {
             padding: 10px;
             font-size: 16px;
             width: 80%;
@@ -43,41 +43,34 @@
 </head>
 <body>
     <header>
-        <h1>Cybersecurity Challenge</h1>
+        <h1>Cybersecurity Web Challenge</h1>
     </header>
-    <h2>User Registration</h2>
+    <h2>Flag Submission Form</h2>
     <div class="input-container">
         <label for="username">Username:</label>
         <input type="text" id="username" placeholder="Enter your username">
     </div>
     <div class="input-container">
-        <label for="publicKeyFile">Public Key:</label>
-        <input type="file" id="publicKeyFile" accept=".pub">
+        <label for="signedFlag">Encrypted and signed Flag:</label>
+        <textarea id="signedFlag" placeholder="Enter the encrypted and signed flag"></textarea>
     </div>
-    <button onclick="registerUser()">Register</button>
+    <button onclick="submitFlag()">Submit</button>
 
     <script>
-        function registerUser() {
+        function submitFlag() {
             const username = document.getElementById('username').value;
-            const publicKeyFile = document.getElementById('publicKeyFile').files[0];
+            const signedFlag = document.getElementById('signedFlag').value;
 
-            if (!username || !publicKeyFile) {
-                alert('Please provide both a username and a public key file.');
+            if (!username || !signedFlag) {
+                alert('Please provide both your username and the encrypted and signed flag.');
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const publicKey = event.target.result;
+            console.log('Username:', username);
+            console.log('Encrypted and signed flag:', signedFlag);
 
-                console.log('Username:', username);
-                console.log('Public key:', publicKey);
-
-                alert('User registered successfully.');
-                window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html ';
-            };
-
-            reader.readAsText(publicKeyFile);
+            alert("Flag submitted for validation.");
+            window.location.href = 'https://html-preview.github.io/?url=https://github.com/jgmena-git/simhackcorp/blob/main/webRanking/index.html';
         }
     </script>
 </body>
