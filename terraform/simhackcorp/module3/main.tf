@@ -1,59 +1,63 @@
 resource "opennebula_virtual_machine" "DDBBserver_SimHackCorp" {
-  name        = "DDBBserver.SimHackCorp.lab"
+  count       = length(var.lab_sets)
+  name        = "DDBBserver.SimHackCorp.lab_${count.index}"
   template_id = 62
-  group       = "Ciber00"
-  permissions = "660"
+  group       = var.lab_sets[count.index].group_name
+  permissions = "600"
 
   context = {
-    USER_NAME  = "jgarcia"   # Opennebula Username
-    GROUP_NAME = "Ciber00"  # Opennebula Group
+    USER_NAME  = var.lab_sets[count.index].user_name
+    GROUP_NAME = var.lab_sets[count.index].group_name
   }
   nic {
-    network_id      = 248
-  }
-}
-
-resource "opennebula_virtual_machine" "Intranet_SimHackCorp" {
-  name        = "Intranet.SimHackCorp.lab"
-  template_id = 64
-  group       = "Ciber00"
-  permissions = "660"
-
-  context = {
-    USER_NAME  = "jgarcia"   # Opennebula Username
-    GROUP_NAME = "Ciber00"  # Opennebula Group
-  }
-  nic {
-    network_id      = 245
+    network_id = var.lab_sets[count.index].network_id_servers
   }
 }
 
 resource "opennebula_virtual_machine" "OnlineShop_SimHackCorp" {
-  name        = "OnlineShop.SimHackCorp.lab"
+  count       = length(var.lab_sets)
+  name        = "OnlineShop.SimHackCorp.lab_${count.index}"
   template_id = 63
-  group       = "Ciber00"
-  permissions = "660"
+  group       = var.lab_sets[count.index].group_name
+  permissions = "600"
 
   context = {
-    USER_NAME  = "jgarcia"   # Opennebula Username
-    GROUP_NAME = "Ciber00"  # Opennebula Group
+    USER_NAME  = var.lab_sets[count.index].user_name
+    GROUP_NAME = var.lab_sets[count.index].group_name
   }
   nic {
-    network_id      = 245
+    network_id = var.lab_sets[count.index].network_id_dmz
+  }
+}
+
+resource "opennebula_virtual_machine" "Intranet_SimHackCorp" {
+  count       = length(var.lab_sets)
+  name        = "Intranet.SimHackCorp.lab_${count.index}"
+  template_id = 64
+  group       = var.lab_sets[count.index].group_name
+  permissions = "600"
+
+  context = {
+    USER_NAME  = var.lab_sets[count.index].user_name
+    GROUP_NAME = var.lab_sets[count.index].group_name
+  }
+  nic {
+    network_id = var.lab_sets[count.index].network_id_dmz
   }
 }
 
 resource "opennebula_virtual_machine" "Kali_SimHackCorp" {
-  name        = "Kali.SimHackCorp.lab"
+  count       = length(var.lab_sets)
+  name        = "Kali.SimHackCorp.lab_${count.index}"
   template_id = 65
-  group       = "Ciber00"
-  permissions = "660"
+  group       = var.lab_sets[count.index].group_name
+  permissions = "600"
 
   context = {
-    USER_NAME  = "jgarcia"   # Opennebula Username
-    GROUP_NAME = "Ciber00"  # Opennebula Group
+    USER_NAME  = var.lab_sets[count.index].user_name
+    GROUP_NAME = var.lab_sets[count.index].group_name
   }
   nic {
-    network_id      = 2
+    network_id = var.lab_sets[count.index].network_id_otherwan
   }
 }

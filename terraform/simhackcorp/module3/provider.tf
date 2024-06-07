@@ -8,6 +8,6 @@ terraform {
 }
 provider "opennebula" {
   endpoint  = "http://localhost:2633/RPC2"
-  username  = "oneadmin"
+  username  = "username"
   password  = "Your_Secure.Password"
 }
